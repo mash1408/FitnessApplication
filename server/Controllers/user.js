@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
 
@@ -31,6 +30,7 @@ exports.signup = async (req, res, next) => {
       if (!err.statusCode) err.statusCode = 500;
       next(err);
     });
+
 };
 
 exports.login = async (req, res, next) => {

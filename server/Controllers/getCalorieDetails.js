@@ -2,7 +2,7 @@ var axios = require('axios');
 const Calorie = require('../models/calorie');
 
 
-exports.getCalories = (req, res, next) => {
+exports.updateCalories = (req, res, next) => {
      const  {foodItem} = req.body;
 var config = {
   method: 'get',
@@ -16,7 +16,7 @@ var config = {
 
 
 axios(config)
-.then(function (response) {
+.then(async function (response) {
   //get date and time
   var today = new Date();
   var date = today.getDate();
@@ -28,19 +28,29 @@ axios(config)
     items.items.forEach((item, i) =>{
       total += item.calories
     });
-    console.log(Calorie.findOne({userId:req.userId}))
-    Calorie.updateOne({userId:req.userId}, 
-      {caloriesConsumedtoday:total, lastUpdated: new Date()}, function (err, docs) {
-      if (err){
-          console.log(err)
-      }
-      else{
-          console.log("Updated Docs : ", docs);
-      }
-  });
+    Calorie.findOne({ userId: req.userId })
+    .then(function(doc) {
+      if(!doc)
+          throw new Error('No record found.');
+      
+       Calorie.updateOne({userId:req.userId}, 
+            {caloriesConsumedtoday:total+doc.caloriesConsumedtoday}, function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Updated Docs : ", docs);
+            }
+        })
+        res.status(200).json({currentCalories:total+doc.caloriesConsumedtoday, calorieGoal: doc.calorieGoal, maintainanceCalorie: doc.maintainanceCalorie})
+})
+
+     
+
+    
 
 
-    res.status(200).json(response.data)
+  
 })
 .catch(function (error) {
   res.status(500).json(error)

@@ -2,11 +2,14 @@ const Calorie = require('../models/calorie');
 const User = require('../models/user');
 
 
-
-
 //getting user information for calculating calorie intake
 exports.getUserInfo = async (req, res, next) => {
     const { gender, activity, height, weight, age } = req.body;
+    if (gender === '' || activity === '' || height==='' || weight==='' || age==='') {
+      const err = new Error('Invalid Data');
+      res.status(500).json({ error: err, });
+      return
+    }
     try{
       var BMR;
         if(gender=="women")
@@ -43,5 +46,5 @@ exports.getUserInfo = async (req, res, next) => {
         } catch(err) {
           res.status(500).json({ error: err, });
         }
-    
+        
   };

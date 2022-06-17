@@ -4,7 +4,7 @@ const getCaloriesDetails= require('../Controllers/getCalorieDetails');
 const calorieController = require('../Controllers/calorie');
 const auth = require('../middleware/auth');
 //get calorie details of one ingredient
-router.get('/getCalorieDetails',auth,getCaloriesDetails.getCalories );
+router.post('/getCalorieDetails',auth,getCaloriesDetails.updateCalories );
 //get user info of calories
 router.put('/getUserDetails',auth,calorieController.getUserInfo );
 

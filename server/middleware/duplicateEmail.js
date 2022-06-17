@@ -4,4 +4,5 @@ module.exports = async(req, res, next) => {
   if(duplicate){
     res.status(409).json({ msg: ' Email already exists'});
   }
+  next()
 }
