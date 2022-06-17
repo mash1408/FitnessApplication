@@ -8,3 +8,5 @@ BACKEND CODE FOR THE FRONTEND CODE ALREADY IN MY PROFILE.
 ```populate .env```
 
 ```npm start```
+# Hosted url: 
+```https://peaceful-shore-79055.herokuapp.com```
