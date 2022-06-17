@@ -14,7 +14,7 @@ const Login = ({setUser})=>{
        localStorage.setItem('loginToken', res.data.token)
        axios.defaults.headers.common['Authorization'] =    
          'Bearer'+res.data.token
-       setUser({ auth:true, name: res.data.username })
+       setUser({ auth:true, email: res.data.email })
     })
     .catch(err=>{
        if(err.response){
@@ -29,14 +29,11 @@ const Login = ({setUser})=>{
     setErrors('')
     axios.put('users/signup', {email:username,password:password})
     .then(res=> {
-      username=''
-      password=''
-      console.log(res)
-      handleClick()
+       setUser({ auth:true, email: res.data.userId })
     })
     .catch(err=>{
        if(err.response){
-         if(err.response.status===400) setErrors('Invalid credentials')
+         if(err.response.status===400) setErrors('Bad request')
          else setErrors('Please try again.')
     }
        console.log(err)

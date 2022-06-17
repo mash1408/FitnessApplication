@@ -5,7 +5,7 @@ import Profile from './components/Profile'
 import './App.css';
 axios.defaults.baseURL = 'http://localhost:5000'
 const App = ()=> {
-  const [user, setUser] = useState({ auth:false, name:''})
+  const [user, setUser] = useState({ auth:false, email:''})
   return (
      <div className="App">
         { user.auth?
