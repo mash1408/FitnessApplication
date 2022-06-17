@@ -10,3 +10,6 @@ BACKEND CODE FOR THE FRONTEND CODE ALREADY IN MY PROFILE.
 ```npm start```
 # Hosted url: 
 ```https://peaceful-shore-79055.herokuapp.com```
+# Third-party API
+``` https://rapidapi.com/calorieninjas/api/calorieninjas/ ```
+
